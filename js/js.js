@@ -177,6 +177,35 @@ function start() { // Inicio da função start()
 	$("#inimigo1").css("left",694);
 	$("#inimigo1").css("top",posicaoY);
 	}
+// jogador com o inimigo2 
+    if (colisao2.length>0) {
+	
+	inimigo2X = parseInt($("#inimigo2").css("left"));
+	inimigo2Y = parseInt($("#inimigo2").css("top"));
+	explosao2(inimigo2X,inimigo2Y);
+			
+	$("#inimigo2").remove();
+		
+	reposicionaInimigo2();
+		
+	}	
+// Disparo com o inimigo1
+		
+	if (colisao3.length>0) {
+		
+		
+	inimigo1X = parseInt($("#inimigo1").css("left"));
+	inimigo1Y = parseInt($("#inimigo1").css("top"));
+		
+	explosao1(inimigo1X,inimigo1Y);
+	$("#disparo").css("left",950);
+		
+	posicaoY = parseInt(Math.random() * 334);
+	$("#inimigo1").css("left",694);
+	$("#inimigo1").css("top",posicaoY);
+		
+	}
+
 
 	} //Fim da função colisao()
 	
@@ -202,7 +231,44 @@ function start() { // Inicio da função start()
 	} // Fim da função explosao1()
 
 
-
-
+//Reposiciona Inimigo2
+	
+	function reposicionaInimigo2() {
+	
+	var tempoColisao4=window.setInterval(reposiciona4, 5000);
+		
+		function reposiciona4() {
+		window.clearInterval(tempoColisao4);
+		tempoColisao4=null;
+			
+			if (fimdejogo==false) {
+			
+			$("#fundoGame").append("<div id=inimigo2></div");
+			
+			}
+			
+		}	
+	}	
+	function explosao2(inimigo2X,inimigo2Y) {
+	
+		$("#fundoGame").append("<div id='explosao2'></div");
+		$("#explosao2").css("background-image", "url(imgs/explosao.png)");
+		var div2=$("#explosao2");
+		div2.css("top", inimigo2Y);
+		div2.css("left", inimigo2X);
+		div2.animate({width:200, opacity:0}, "slow");
+	
+		var tempoExplosao2=window.setInterval(removeExplosao2, 1000);
+		
+			function removeExplosao2() {
+				
+				div2.remove();
+				window.clearInterval(tempoExplosao2);
+				tempoExplosao2=null;
+			
+			}
+		
+		
+	} // Fim da fun��o explosao2()
 
 }// Fim da função start
